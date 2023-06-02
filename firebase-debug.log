@@ -1,0 +1,45 @@
+[debug] [2023-05-30T16:56:44.126Z] ----------------------------------------------------------------------
+[debug] [2023-05-30T16:56:44.128Z] Command:       /usr/local/bin/firebase /Users/ram/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase projects:create
+[debug] [2023-05-30T16:56:44.128Z] CLI Version:   12.2.1
+[debug] [2023-05-30T16:56:44.128Z] Platform:      darwin
+[debug] [2023-05-30T16:56:44.129Z] Node Version:  v16.16.0
+[debug] [2023-05-30T16:56:44.130Z] Time:          Tue May 30 2023 22:26:44 GMT+0530 (India Standard Time)
+[debug] [2023-05-30T16:56:44.131Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-30T16:56:44.139Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-30T16:56:44.141Z] > authorizing via signed-in user (ramtanniru2@gmail.com)
+[debug] [2023-05-30T16:57:03.561Z] > refreshing access token with scopes: []
+[debug] [2023-05-30T16:57:03.566Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-05-30T16:57:03.567Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-05-30T16:57:03.798Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-05-30T16:57:03.800Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-05-30T16:57:03.819Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2023-05-30T16:57:03.820Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"11x13s","name":"vit_ap"}
+[debug] [2023-05-30T16:57:06.010Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 400
+[debug] [2023-05-30T16:57:06.016Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"error":{"code":400,"message":"Request contains an invalid argument.","status":"INVALID_ARGUMENT","details":[{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"project_id","description":"project_id contains invalid characters"},{"field":"display_name","description":"project display name contains invalid characters"}]},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"url":"https://cloud.google.com/resource-manager/reference/rest/v1/projects"}]}]}}
+[debug] [2023-05-30T16:57:06.275Z] FirebaseError: HTTP Error: 400, Request contains an invalid argument.
+    at responseToError (/Users/ram/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/responseToError.js:49:12)
+    at RetryOperation._fn (/Users/ram/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/apiv2.js:288:77)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.
+[debug] [2023-05-30T16:57:29.174Z] ----------------------------------------------------------------------
+[debug] [2023-05-30T16:57:29.176Z] Command:       /usr/local/bin/firebase /Users/ram/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase projects:create
+[debug] [2023-05-30T16:57:29.176Z] CLI Version:   12.2.1
+[debug] [2023-05-30T16:57:29.176Z] Platform:      darwin
+[debug] [2023-05-30T16:57:29.177Z] Node Version:  v16.16.0
+[debug] [2023-05-30T16:57:29.183Z] Time:          Tue May 30 2023 22:27:29 GMT+0530 (India Standard Time)
+[debug] [2023-05-30T16:57:29.183Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-30T16:57:29.192Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-30T16:57:29.193Z] > authorizing via signed-in user (ramtanniru2@gmail.com)
+[debug] [2023-05-30T16:57:45.949Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2023-05-30T16:57:45.952Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"11135","name":"vit"}
+[debug] [2023-05-30T16:57:47.330Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 400
+[debug] [2023-05-30T16:57:47.333Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"error":{"code":400,"message":"Request contains an invalid argument.","status":"INVALID_ARGUMENT","details":[{"@type":"type.googleapis.com/google.rpc.BadRequest","fieldViolations":[{"field":"project_id","description":"project_id must be at least 6 characters long"},{"field":"project_id","description":"project_id contains invalid characters"},{"field":"display_name","description":"project display name must be at least 4 characters"}]},{"@type":"type.googleapis.com/google.rpc.Help","links":[{"url":"https://cloud.google.com/resource-manager/reference/rest/v1/projects"}]}]}}
+[debug] [2023-05-30T16:57:47.581Z] FirebaseError: HTTP Error: 400, Request contains an invalid argument.
+    at responseToError (/Users/ram/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/responseToError.js:49:12)
+    at RetryOperation._fn (/Users/ram/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/apiv2.js:288:77)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.
