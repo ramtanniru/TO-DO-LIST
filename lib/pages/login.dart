@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vit_ap/services/google_auth.dart';
+import 'package:vit_ap/services/fb_auth.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -8,30 +10,86 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  google_auth g_auth = google_auth();
+  void _signInWithGoogle() async {
+    bool success = await g_auth.signInWithGoogle();
+    if (success) {
+      Navigator.pushReplacementNamed(context, '/home_1');
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Authentication Failed'),
+            content: Text('Failed to sign in with Google.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  fb_auth fbAuth = fb_auth();
+  void _signInWithFb() async {
+    try {
+      bool success = await fbAuth.signInWithFb();
+      if (success) {
+        Navigator.pushReplacementNamed(context, '/home_1');
+      } else {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Authentication Failed'),
+              content: Text('Failed to sign in with Facebook.'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (e) {
+      print('Facebook authentication error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Login'),
-      //   backgroundColor: Colors.transparent,
-      //   // elevation: 0,
-      //   centerTitle: true,
-      // ),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Color(0xff654AFF),
+        toolbarHeight: 0,
+      ),
       body: Stack(
         children: [
           Container(
             alignment: AlignmentDirectional(0, -0.61),
             child: Image.asset(
               'assets/images/login-2.png',
-              height: 400,
+              height: 300,
               width: double.maxFinite,
+              fit: BoxFit.fitWidth,
             ),
           ),
           Container(
             alignment: AlignmentDirectional(-1, -1.03),
             child: Image.asset(
               'assets/images/login-1.png',
-              height: 380,
+              height: 350,
               width: double.maxFinite,
               fit: BoxFit.fitHeight,
             ),
@@ -122,14 +180,12 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   IconButton(
-                    onPressed: () {
-                      // Navigator.pushNamed(context, routeName);
-                    },
+                    onPressed: _signInWithFb,
                     icon: Image.asset('assets/icons/facebook.png'),
                     iconSize: 30,
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: _signInWithGoogle,
                     icon: Image.asset('assets/icons/google.png'),
                     iconSize: 30,
                   ),
@@ -140,7 +196,7 @@ class _LoginState extends State<Login> {
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Image.asset('assets/icons/linkedin.png'),
+                    icon: Image.asset('assets/icons/github2.png'),
                     iconSize: 30,
                   ),
                 ],

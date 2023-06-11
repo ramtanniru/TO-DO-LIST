@@ -15,7 +15,21 @@ class _home_1State extends State<home_1> {
         title: Text('Home'),
         centerTitle: true,
       ),
-      body: Stack(),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            alignment: AlignmentDirectional(0, 0.15),
+            child: Text('Index'),
+          ),
+        ],
+      ),
+      bottomNavigationBar:
+          BottomNavigationBar(items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'settings'),
+        BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'settings'),
+        // BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'settings'),
+      ]),
     );
   }
 }
