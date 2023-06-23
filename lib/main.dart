@@ -4,7 +4,7 @@ import 'package:vit_ap/pages/Home-1.dart';
 import 'package:vit_ap/pages/home.dart';
 import 'package:vit_ap/pages/login-1.dart';
 import 'package:vit_ap/pages/login.dart';
-import 'package:vit_ap/pages/signin.dart';
+import 'package:vit_ap/pages/signin-1.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {

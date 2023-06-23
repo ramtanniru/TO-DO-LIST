@@ -124,8 +124,8 @@ class _login_1State extends State<login_1> {
           ),
           Positioned(
             top: 430,
-            left: 0,
-            right: 0,
+            left: 30,
+            right: 30,
             child: Container(
               width: 350,
               height: 50,
@@ -137,7 +137,10 @@ class _login_1State extends State<login_1> {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide.none,
+                      borderSide: BorderSide(
+                          color: Color(0xff654AFF),
+                          style: BorderStyle.solid,
+                          width: 2.0),
                     ),
                     labelText: 'Password',
                   ),
@@ -146,7 +149,7 @@ class _login_1State extends State<login_1> {
             ),
           ),
           Positioned(
-            top: 500,
+            top: 550,
             left: 30,
             right: 30,
             child: InkWell(
@@ -176,33 +179,7 @@ class _login_1State extends State<login_1> {
             ),
           ),
           Positioned(
-            bottom: 20,
-            left: 0,
-            right: 0,
-            child: Container(
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'New user?',
-                    style: TextStyle(
-                      color: Color(0xff4F4F4F),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(color: Color(0xff4F4F4F)),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 60,
+            top: 650,
             left: 0,
             right: 0,
             child: Container(
@@ -222,6 +199,32 @@ class _login_1State extends State<login_1> {
                   Expanded(
                     child: Divider(
                       color: Color(0xff252525),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 700,
+            left: 0,
+            right: 0,
+            child: Container(
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'New user?',
+                    style: TextStyle(
+                      color: Color(0xff4F4F4F),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Sign in',
+                      style: TextStyle(color: Color(0xff4F4F4F)),
                     ),
                   ),
                 ],
