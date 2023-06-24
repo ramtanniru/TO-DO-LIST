@@ -80,16 +80,16 @@ class _LoginState extends State<Login> {
             alignment: AlignmentDirectional(0, -0.61),
             child: Image.asset(
               'assets/images/login-2.png',
-              height: 300,
+              height: 380,
               width: double.maxFinite,
               fit: BoxFit.fitWidth,
             ),
           ),
           Container(
-            alignment: AlignmentDirectional(-1, -1.03),
+            alignment: AlignmentDirectional(-1, -1.33),
             child: Image.asset(
               'assets/images/login-1.png',
-              height: 350,
+              height: 430,
               width: double.maxFinite,
               fit: BoxFit.fitHeight,
             ),

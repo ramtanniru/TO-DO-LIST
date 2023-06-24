@@ -47,12 +47,14 @@ class _SigninState extends State<Signin> {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
     String username = usernameController.text.trim();
+
     try {
       await usersCollection.add({
         'email': email,
         'password': password,
         'username': username,
       });
+
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -88,6 +90,7 @@ class _SigninState extends State<Signin> {
           );
         },
       );
+      print('Error: $error');
     }
   }
 
@@ -183,7 +186,7 @@ class _SigninState extends State<Signin> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
-                          controller: usernameController,
+                          controller: emailController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -244,7 +247,7 @@ class _SigninState extends State<Signin> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
-                          controller: usernameController,
+                          controller: passwordController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -255,6 +258,32 @@ class _SigninState extends State<Signin> {
                       ),
                     ),
                   ),
+                ),
+                InkWell(
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Color(0xff654AFF), width: 1.5),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    color: Color(0xff654AFF),
+                    child: Container(
+                      width: 350,
+                      height: 50,
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Login',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  onTap: () {
+                    _saveData();
+                    Navigator.pushNamed(context, '/home_2');
+                  },
                 ),
               ],
             ),
