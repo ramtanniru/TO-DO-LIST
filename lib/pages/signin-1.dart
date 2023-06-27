@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vit_ap/services/google_auth.dart';
 
+import 'Home-2.dart';
+
 class Signin extends StatefulWidget {
   const Signin({super.key});
 
@@ -10,50 +12,33 @@ class Signin extends StatefulWidget {
 }
 
 class _SigninState extends State<Signin> {
-  TextEditingController emailController = new TextEditingController();
-  TextEditingController passwordController = new TextEditingController();
-  TextEditingController usernameController = new TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+
   CollectionReference usersCollection =
-      FirebaseFirestore.instance.collection('users');
-  google_auth g_auth = google_auth();
+      FirebaseFirestore.instance.collection('credentials');
+
   Color side = Colors.white;
   bool onTouch = true;
-  void _signInWithGoogle() async {
-    bool success = await g_auth.signInWithGoogle();
-    if (success) {
-      Navigator.pushReplacementNamed(context, '/home_1');
-    } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Authentication Failed'),
-            content: Text('Failed to sign in with Google.'),
-            actions: <Widget>[
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
 
   void _saveData() async {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
-    String username = usernameController.text.trim();
+    String u_name = usernameController.text.trim();
 
     try {
-      await usersCollection.add({
+      await usersCollection.doc(u_name).set({
         'email': email,
         'password': password,
-        'username': username,
+        'username': u_name,
       });
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Home_2(username: u_name),
+        ),
+      );
 
       showDialog(
         context: context,
@@ -259,6 +244,9 @@ class _SigninState extends State<Signin> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 20,
+                ),
                 InkWell(
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -280,10 +268,7 @@ class _SigninState extends State<Signin> {
                       ),
                     ),
                   ),
-                  onTap: () {
-                    _saveData();
-                    Navigator.pushNamed(context, '/home_2');
-                  },
+                  onTap: _saveData,
                 ),
               ],
             ),

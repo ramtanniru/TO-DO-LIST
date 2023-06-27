@@ -2,18 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Home_2 extends StatefulWidget {
-  const Home_2({Key? key});
+  final String username;
+
+  const Home_2({Key? key, required this.username}) : super(key: key);
 
   @override
   State<Home_2> createState() => _Home_2State();
 }
 
 class _Home_2State extends State<Home_2> {
-  CollectionReference<Map<String, dynamic>> userCollections =
-      FirebaseFirestore.instance.collection('users');
-
+  late CollectionReference<Map<String, dynamic>> userCollections;
   TextEditingController _textFieldController = TextEditingController();
   List<String> tasks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    userCollections =
+        FirebaseFirestore.instance.collection('users/${widget.username}/tasks');
+    _read();
+  }
 
   void _create(String task) {
     userCollections
@@ -23,7 +31,9 @@ class _Home_2State extends State<Home_2> {
   }
 
   void _read() {
-    userCollections.get().then((QuerySnapshot querySnapshot) {
+    userCollections
+        .get()
+        .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) {
       setState(() {
         tasks = querySnapshot.docs
             .map((doc) =>
@@ -47,12 +57,6 @@ class _Home_2State extends State<Home_2> {
         .delete()
         .then((value) => print('Task deleted'))
         .catchError((error) => print('Failed to delete task: $error'));
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _read();
   }
 
   @override
@@ -85,7 +89,7 @@ class _Home_2State extends State<Home_2> {
                         IconButton(
                           icon: Icon(Icons.edit),
                           onPressed: () {
-                            // _showEditDialog(task, index, snapshot); 
+                            _showEditDialog(task, index, snapshot);
                           },
                         ),
                         IconButton(
@@ -129,6 +133,8 @@ class _Home_2State extends State<Home_2> {
           ),
           actions: <Widget>[
             ElevatedButton(
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: Color(0xff654AFF)),
               child: Text('Add'),
               onPressed: () {
                 String task = _textFieldController.text.trim();
@@ -145,8 +151,8 @@ class _Home_2State extends State<Home_2> {
     );
   }
 
-  void _showEditDialog(
-      String task, int index, QuerySnapshot<Map<String, dynamic>> snapshot) {
+  void _showEditDialog(String task, int index,
+      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
     TextEditingController _editTextFieldController =
         TextEditingController(text: task);
 
@@ -165,7 +171,7 @@ class _Home_2State extends State<Home_2> {
               onPressed: () {
                 String newTask = _editTextFieldController.text.trim();
                 if (newTask.isNotEmpty) {
-                  String taskId = snapshot.docs[index].id;
+                  String taskId = snapshot.data!.docs[index].id;
                   _update(taskId, newTask);
                 }
                 Navigator.of(context).pop();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:vit_ap/pages/Home-2.dart';
 import 'package:vit_ap/pages/signin.dart';
 import 'package:vit_ap/services/login_auth.dart';
 
@@ -13,21 +14,50 @@ class login_1 extends StatefulWidget {
 }
 
 class _login_1State extends State<login_1> {
-  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
+  bool onTouch = false;
+  Color side = Colors.white;
+  CollectionReference authorize =
+      FirebaseFirestore.instance.collection('credentials');
+
+  void _validate() {
+    String u_name = usernameController.text.trim();
+    String password = passwordController.text.trim();
+    authorize.doc(u_name).get().then((DocumentSnapshot snapshot) {
+      if (snapshot.exists) {
+        Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
+        print(data);
+        if (data != null) {
+          if (data['password'] == password) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Home_2(username: u_name),
+              ),
+            );
+          }
+          ;
+        } else {
+          print('password error-1');
+        }
+      } else {
+        print('password error');
+      }
+      ;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-        centerTitle: true,
-        backgroundColor: Color(0xff654AFF),
-        elevation: 0,
-      ),
-      body: Stack(
-        children: [
+        appBar: AppBar(
+          title: Text('Login'),
+          centerTitle: true,
+          backgroundColor: Color(0xff654AFF),
+          elevation: 0,
+        ),
+        body: Stack(children: [
           Positioned(
             top: 0,
             left: 0,
@@ -101,138 +131,151 @@ class _login_1State extends State<login_1> {
           ),
           Positioned(
             top: 350,
-            left: 0,
-            right: 0,
-            child: Container(
-              width: 350,
-              height: 50,
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: usernameController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide.none,
-                    ),
-                    labelText: 'Username',
+            left: 35,
+            child: Column(children: <Widget>[
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    side = (onTouch) ? Color(0xff654AFF) : Colors.white;
+                    onTouch = false;
+                  });
+                },
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    side: BorderSide(color: side),
                   ),
+                  color: Color(0xffF8F7F7),
+                  child: Container(
+                    width: 350,
+                    height: 50,
+                    alignment: AlignmentDirectional(-0.7, 0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: usernameController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide.none),
+                          labelText: 'username',
+                        ),
+                      ),
+                    ),
+                  ),
+                  //),
                 ),
               ),
-            ),
-          ),
-          Positioned(
-            top: 430,
-            left: 30,
-            right: 30,
-            child: Container(
-              width: 350,
-              height: 50,
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: passwordController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                          color: Color(0xff654AFF),
-                          style: BorderStyle.solid,
-                          width: 2.0),
-                    ),
-                    labelText: 'Password',
+              SizedBox(
+                height: 10,
+              ),
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    side = (onTouch) ? Color(0xff654AFF) : Colors.white;
+                    onTouch = false;
+                  });
+                },
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    side: BorderSide(color: side),
                   ),
+                  color: Color(0xffF8F7F7),
+                  child: Container(
+                    width: 350,
+                    height: 50,
+                    alignment: AlignmentDirectional(-0.7, 0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide.none),
+                          labelText: 'password',
+                        ),
+                      ),
+                    ),
+                  ),
+                  //),
                 ),
               ),
-            ),
-          ),
-          Positioned(
-            top: 550,
-            left: 30,
-            right: 30,
-            child: InkWell(
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Color(0xff654AFF), width: 1.5),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                color: Colors.white,
-                child: Container(
-                  width: 350,
-                  height: 50,
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Login',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 25,
-                      color: Color(0xff654AFF),
-                    ),
-                  ),
-                ),
+              SizedBox(
+                height: 50,
               ),
-              onTap: () {
-                Navigator.pushNamed(context, '/login_1');
-              },
-            ),
-          ),
-          Positioned(
-            top: 650,
-            left: 0,
-            right: 0,
-            child: Container(
-              width: 300,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Expanded(
-                    child: Divider(
-                      color: Color(0xff252525),
-                    ),
+              InkWell(
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Color(0xff654AFF), width: 1.5),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  Text(
-                    'OR',
-                    style: TextStyle(color: Color(0xff654AFF)),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      color: Color(0xff252525),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            top: 700,
-            left: 0,
-            right: 0,
-            child: Container(
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'New user?',
-                    style: TextStyle(
-                      color: Color(0xff4F4F4F),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
+                  color: Colors.white,
+                  child: Container(
+                    width: 350,
+                    height: 50,
+                    alignment: Alignment.center,
                     child: Text(
-                      'Sign in',
-                      style: TextStyle(color: Color(0xff4F4F4F)),
+                      'Login',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 25,
+                        color: Color(0xff654AFF),
+                      ),
                     ),
                   ),
-                ],
+                ),
+                onTap: _validate,
               ),
-            ),
-          ),
-        ],
-      ),
-    );
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: 300,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      child: Divider(
+                        color: Color(0xff252525),
+                      ),
+                    ),
+                    Text(
+                      'OR',
+                      style: TextStyle(color: Color(0xff654AFF)),
+                    ),
+                    Expanded(
+                      child: Divider(
+                        color: Color(0xff252525),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'New user?',
+                      style: TextStyle(
+                        color: Color(0xff4F4F4F),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(color: Color(0xff4F4F4F)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ]),
+          )
+        ]));
   }
 }
