@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:provider/provider.dart';
-// import 'package:vit_ap/services/login_auth.dart';
 import 'Home-2.dart';
 
 class login_1 extends StatefulWidget {
@@ -27,7 +24,7 @@ class _login_1State extends State<login_1> {
         print(data);
         if (data != null) {
           if (data['password'] == password) {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => Home_2(username: u_name),
@@ -156,7 +153,7 @@ class _login_1State extends State<login_1> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: 20),
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -181,7 +178,7 @@ class _login_1State extends State<login_1> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: 20),
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -217,7 +214,7 @@ class _login_1State extends State<login_1> {
                         ),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      color: Colors.white,
+                      color: Color(0xff654AFF),
                       child: Container(
                         width: 350,
                         height: 50,
@@ -225,9 +222,8 @@ class _login_1State extends State<login_1> {
                         child: Text(
                           'Login',
                           style: TextStyle(
-                            fontWeight: FontWeight.w500,
                             fontSize: 25,
-                            color: Color(0xff654AFF),
+                            color: Colors.white,
                           ),
                         ),
                       ),

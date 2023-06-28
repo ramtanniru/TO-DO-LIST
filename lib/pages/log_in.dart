@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:vit_ap/pages/Home-2.dart';
 import 'package:vit_ap/services/google_auth.dart';
@@ -18,7 +17,6 @@ class _Log_inState extends State<Log_in> {
   void _signInWithGoogle() async {
     bool success = await g_auth.signInWithGoogle();
     if (success) {
-      // Navigator.pushReplacementNamed(context, '/home_2');
       final FirebaseAuth auth = FirebaseAuth.instance;
       final FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -193,7 +191,6 @@ class _Log_inState extends State<Log_in> {
                       child: Text(
                         'Login',
                         style: TextStyle(
-                          fontWeight: FontWeight.w500,
                           fontSize: 25,
                           color: Color(0xff654AFF),
                         ),

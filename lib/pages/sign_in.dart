@@ -28,7 +28,7 @@ class _Sign_inState extends State<Sign_in> {
         'password': password,
         'username': u_name,
       });
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => Home_2(username: u_name),
@@ -229,7 +229,6 @@ class _Sign_inState extends State<Sign_in> {
                               child: Text(
                                 'Sign in',
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w500,
                                   fontSize: 25,
                                   color: Colors.white,
                                 ),
