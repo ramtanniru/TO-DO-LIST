@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:vit_ap/pages/Home-2.dart';
 import 'package:vit_ap/pages/signin.dart';
 import 'package:vit_ap/services/login_auth.dart';
+import 'Home-2.dart';
 
 class login_1 extends StatefulWidget {
   const login_1({super.key});
@@ -16,8 +16,6 @@ class login_1 extends StatefulWidget {
 class _login_1State extends State<login_1> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
-  bool onTouch = false;
-  Color side = Colors.white;
   CollectionReference authorize =
       FirebaseFirestore.instance.collection('credentials');
 
@@ -57,93 +55,87 @@ class _login_1State extends State<login_1> {
           backgroundColor: Color(0xff654AFF),
           elevation: 0,
         ),
-        body: Stack(children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              alignment: Alignment.center,
-              child: Image.asset(
-                'assets/images/login-2.png',
-                height: 420,
-                width: double.infinity,
-              ),
-            ),
-          ),
-          Positioned(
-            top: -20,
-            left: 0,
-            right: 0,
-            child: Container(
-              alignment: Alignment.center,
-              child: Image.asset(
-                'assets/images/login-1.png',
-                height: 300,
-                width: double.infinity,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 30,
-            left: 0,
-            right: 0,
-            child: Container(
-              child: Image.asset(
-                'assets/images/logo.png',
-                height: 100,
-                width: 100,
-              ),
-              alignment: Alignment.center,
-            ),
-          ),
-          Positioned(
-            top: 150,
-            left: 0,
-            right: 0,
-            child: Container(
-              child: Text(
-                'VIT-AP',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Limelight',
-                  fontSize: 50,
-                ),
-              ),
-              alignment: Alignment.center,
-            ),
-          ),
-          Positioned(
-            top: 300,
-            left: 0,
-            right: 0,
-            child: Container(
-              alignment: Alignment.center,
-              child: Text(
-                'Welcome back!',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+        body: SafeArea(
+          child: Stack(children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  'assets/images/login-2.png',
+                  height: 420,
+                  width: double.infinity,
                 ),
               ),
             ),
-          ),
-          Positioned(
-            top: 350,
-            left: 35,
-            child: Column(children: <Widget>[
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    side = (onTouch) ? Color(0xff654AFF) : Colors.white;
-                    onTouch = false;
-                  });
-                },
-                child: Card(
+            Positioned(
+              top: -20,
+              left: 0,
+              right: 0,
+              child: Container(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  'assets/images/login-1.png',
+                  height: 300,
+                  width: double.infinity,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 30,
+              left: 0,
+              right: 0,
+              child: Container(
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  height: 100,
+                  width: 100,
+                ),
+                alignment: Alignment.center,
+              ),
+            ),
+            Positioned(
+              top: 150,
+              left: 0,
+              right: 0,
+              child: Container(
+                child: Text(
+                  'VIT-AP',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Limelight',
+                    fontSize: 50,
+                  ),
+                ),
+                alignment: Alignment.center,
+              ),
+            ),
+            Positioned(
+              top: 300,
+              left: 0,
+              right: 0,
+              child: Container(
+                alignment: Alignment.center,
+                child: Text(
+                  'Welcome back!',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 350,
+              left: 30,
+              right: 30,
+              child: Column(children: <Widget>[
+                Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
-                    side: BorderSide(color: side),
                   ),
                   color: Color(0xffF8F7F7),
                   child: Container(
@@ -165,21 +157,12 @@ class _login_1State extends State<login_1> {
                   ),
                   //),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    side = (onTouch) ? Color(0xff654AFF) : Colors.white;
-                    onTouch = false;
-                  });
-                },
-                child: Card(
+                SizedBox(
+                  height: 10,
+                ),
+                Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
-                    side: BorderSide(color: side),
                   ),
                   color: Color(0xffF8F7F7),
                   child: Container(
@@ -201,81 +184,83 @@ class _login_1State extends State<login_1> {
                   ),
                   //),
                 ),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              InkWell(
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Color(0xff654AFF), width: 1.5),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  color: Colors.white,
-                  child: Container(
-                    width: 350,
-                    height: 50,
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 25,
-                        color: Color(0xff654AFF),
-                      ),
-                    ),
-                  ),
+                SizedBox(
+                  height: 50,
                 ),
-                onTap: _validate,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: 300,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Expanded(
-                      child: Divider(
-                        color: Color(0xff252525),
-                      ),
+                InkWell(
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Color(0xff654AFF), width: 1.5),
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    Text(
-                      'OR',
-                      style: TextStyle(color: Color(0xff654AFF)),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        color: Color(0xff252525),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'New user?',
-                      style: TextStyle(
-                        color: Color(0xff4F4F4F),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {},
+                    color: Colors.white,
+                    child: Container(
+                      width: 350,
+                      height: 50,
+                      alignment: Alignment.center,
                       child: Text(
-                        'Sign in',
-                        style: TextStyle(color: Color(0xff4F4F4F)),
+                        'Login',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 25,
+                          color: Color(0xff654AFF),
+                        ),
                       ),
                     ),
-                  ],
+                  ),
+                  onTap: _validate,
                 ),
-              ),
-            ]),
-          )
-        ]));
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: 300,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Expanded(
+                        child: Divider(
+                          color: Color(0xff252525),
+                        ),
+                      ),
+                      Text(
+                        'OR',
+                        style: TextStyle(color: Color(0xff654AFF)),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          color: Color(0xff252525),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'New user?',
+                        style: TextStyle(
+                          color: Color(0xff4F4F4F),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/signin');
+                        },
+                        child: Text(
+                          'Sign in',
+                          style: TextStyle(color: Color(0xff654AFF)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ]),
+            )
+          ]),
+        ));
   }
 }

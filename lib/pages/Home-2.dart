@@ -167,6 +167,8 @@ class _Home_2State extends State<Home_2> {
           ),
           actions: <Widget>[
             ElevatedButton(
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: Color(0xff654AFF)),
               child: Text('Update'),
               onPressed: () {
                 String newTask = _editTextFieldController.text.trim();
